@@ -4,7 +4,7 @@
   "description": "Bookmaker Office Application",
   "main": "./dist/index.js",
   "scripts": {
-    "preinstall": "npm i -g gulp",
+    "preinstall": "npm i -g gulp typescript",
     "prestart": "gulp build",
     "start": "cd dist && node index.js"
   },
@@ -30,5 +30,8 @@
   "devDependencies": {
     "@types/express": "^4.11.1",
     "gulp-clean": "^0.4.0"
+  },
+  "engines": {
+    "node": "8.9.2"
   }
 }

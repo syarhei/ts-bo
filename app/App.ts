@@ -6,7 +6,8 @@ export class App {
     private app: Application = null;
 
     constructor() {
-        this.port = 8080;
+        const port: string = process.env.PORT;
+        this.port = port ? Number.parseInt(port) : 8080;
         this.app = e();
     }
 
