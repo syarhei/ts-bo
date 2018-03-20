@@ -1,0 +1,7 @@
+{
+  "DATABASE_NAME": "crs",
+  "DATABASE_HOSTNAME": "localhost",
+  "DATABASE_USER": "root",
+  "DATABASE_DIALECT": "mysql",
+  "JSON_WEB_TOKEN_EXPIRED_TIME": 86400
+}

@@ -10,7 +10,8 @@
     "lib": ["es2017"],
     "experimentalDecorators": true,
     "outDir": "dist",
-    "allowJs": true
+    "allowJs": true,
+    "allowSyntheticDefaultImports": true
   },
   "exclude": [
     "node_modules",
