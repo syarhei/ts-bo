@@ -4,7 +4,8 @@ import {APPLICATION} from "./inversify/identifiers/common";
 
 async function main() {
     const app: App = container.get<App>(APPLICATION);
-    await app.init();
+    app.init();
+    await app.sync();
     await app.start();
 }
 

@@ -1,8 +1,8 @@
 import {injectable, inject} from "inversify";
 import {DBContext} from "../../DBContext";
-import {UserModel, User} from "../models/User";
 import * as sequelize from "sequelize";
 import {DATABASE_CONTEXT} from "../../inversify/identifiers/common";
+import {User} from "../models/contracts/User";
 
 @injectable()
 export class UserDAL {

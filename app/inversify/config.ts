@@ -1,12 +1,17 @@
 import "reflect-metadata";
 
 import {Container} from "inversify";
-import {APPLICATION, CONFIG, DATABASE_CONNECTION, DATABASE_CONTEXT, KEY, USER_MODEL} from "./identifiers/common";
+import {
+    APPLICATION, CONFIG, DATABASE_CONNECTION, DATABASE_CONTEXT, KEY, MAIN_CONTROLLER, USER_CONTROLLER,
+    USER_MODEL
+} from "./identifiers/common";
 import {IConfig, IKey} from "../IConfig";
 import {DBContext} from "../DBContext";
-import {UserModel} from "../src/models/User";
+import {UserModel} from "../src/models/UserModel";
 import {DBConnection} from "../DBConnection";
 import {App} from "../App";
+import {UserController} from "../src/routes/UserController";
+import {MainController} from "../src/routes/MainController";
 
 const ENV: string = process.env.NODE_ENV === "production" ? "master" : "local";
 const config: IConfig = require(`../../configs/${ENV}/config.json`);
@@ -19,6 +24,9 @@ container.bind<IKey>(KEY).toConstantValue(key);
 container.bind<DBConnection>(DATABASE_CONNECTION).to(DBConnection).inSingletonScope();
 container.bind<UserModel>(USER_MODEL).to(UserModel);
 container.bind<DBContext>(DATABASE_CONTEXT).to(DBContext).inSingletonScope();
+
+container.bind<UserController>(USER_CONTROLLER).to(UserController);
+container.bind<MainController>(MAIN_CONTROLLER).to(MainController);
 
 container.bind<App>(APPLICATION).to(App).inSingletonScope();
 
