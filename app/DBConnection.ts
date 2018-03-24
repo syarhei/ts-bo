@@ -13,7 +13,9 @@ export class DBConnection {
     ) {
         this.connection = new Datastore(config.DATABASE_NAME, config.DATABASE_USER, key.DATABASE_PASSWORD, {
             dialect: config.DATABASE_DIALECT,
-            host: config.DATABASE_HOSTNAME
+            host: config.DATABASE_HOSTNAME,
+            operatorsAliases: false,
+            logging: false
         });
     }
 }

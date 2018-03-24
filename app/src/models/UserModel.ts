@@ -1,6 +1,7 @@
-import {STRING, Sequelize, default as sequelize, INTEGER} from "sequelize";
+import {STRING, INTEGER, Sequelize, default as sequelize} from "sequelize";
 import {injectable, inject} from "inversify";
 import {DATABASE_CONNECTION} from "../../inversify/identifiers/common";
+import {DBConnection} from "../../DBConnection";
 
 const USER_TABLE: string = "User";
 
@@ -14,9 +15,12 @@ export interface User {
 
 @injectable()
 export class UserModel {
+    private connection: Sequelize;
     constructor(
-        @inject(DATABASE_CONNECTION) private connection: Sequelize
-    ) {}
+        @inject(DATABASE_CONNECTION) {connection}: DBConnection
+    ) {
+        this.connection = connection;
+    }
 
     public get model(): sequelize.Model<User, User> {
         return this.connection.define<User, User>(USER_TABLE, {

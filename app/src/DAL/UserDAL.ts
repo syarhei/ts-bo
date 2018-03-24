@@ -11,4 +11,24 @@ export class UserDAL {
     constructor(@inject(DATABASE_CONTEXT) dbContext: DBContext) {
         this.user = dbContext.USER;
     }
+
+    public async createUser(userOptions: User): Promise<User> {
+        return this.user.create(userOptions);
+    }
+
+    public async getUsersByNickName(nickname: string): Promise<User[]> {
+        return this.user.findAll({
+            where: {
+                nickname: nickname
+            }
+        })
+    }
+
+    public async getUsersByEmail(email: string): Promise<User[]> {
+        return this.user.findAll({
+            where: {
+                email: email
+            }
+        })
+    }
 }

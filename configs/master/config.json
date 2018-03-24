@@ -1,7 +1,7 @@
 {
-  "DATABASE_NAME": "db664pv55tsn0e",
-  "DATABASE_HOSTNAME": "ec2-54-163-246-154.compute-1.amazonaws.com",
-  "DATABASE_USER": "ragadyvqraycwu",
+  "DATABASE_NAME": "d37mb4a49og2io",
+  "DATABASE_HOSTNAME": "ec2-79-125-110-209.eu-west-1.compute.amazonaws.com",
+  "DATABASE_USER": "getrisgvwxcgdt",
   "DATABASE_DIALECT": "postgres",
   "JSON_WEB_TOKEN_EXPIRED_TIME": 86400
 }
