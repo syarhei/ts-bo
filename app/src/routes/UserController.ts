@@ -3,12 +3,17 @@ import {inject, injectable} from "inversify";
 import {AUTH_SERVICE} from "../../inversify/identifiers/common";
 import {AuthService} from "../services/AuthService";
 import {UserError} from "../models/exceptions/UserError";
+import * as autoBind from "auto-bind";
 
 @injectable()
 export class UserController {
     constructor(
         @inject(AUTH_SERVICE) private authService: AuthService
-    ) {}
+    ) {
+        autoBind(this);
+    }
+
+    public set router(value: Router) {}
 
     public get router(): Router {
         const router = Router();
@@ -24,7 +29,7 @@ export class UserController {
         } catch (err) {
             if (err instanceof UserError) {
                 const code: number = 400 + err.statusCode;
-                res.status(code).json(err.message);
+                res.status(code).json({ message: err.message });
             } else {
                 res.status(500).end();
             }
