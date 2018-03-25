@@ -22,8 +22,8 @@ export class UserModel {
         this.connection = connection;
     }
 
-    public get model(): sequelize.Model<User, User> {
-        return this.connection.define<User, User>(USER_TABLE, {
+    public get model(): sequelize.Model<sequelize.Instance<User>, User> {
+        return this.connection.define<sequelize.Instance<User>, User>(USER_TABLE, {
             "nickname": {
                 type: STRING(30),
                 primaryKey: true
