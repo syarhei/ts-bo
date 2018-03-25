@@ -1,9 +1,9 @@
-import {Router, Request, Response} from "express";
+import {Router, Request, Response, NextFunction} from "express";
 import {inject, injectable} from "inversify";
 import {AUTH_SERVICE} from "../../inversify/identifiers/common";
 import {AuthService} from "../services/AuthService";
-import {UserError} from "../models/exceptions/UserError";
 import * as autoBind from "auto-bind";
+import * as wrap from "express-async-wrap";
 
 @injectable()
 export class UserController {
@@ -13,26 +13,17 @@ export class UserController {
         autoBind(this);
     }
 
-    public set router(value: Router) {}
+    public set router(router: Router) {}
 
     public get router(): Router {
         const router = Router();
-        router.post("/user", this.createUser);
+        router.post("/user", wrap(this.createUser));
         return router;
     }
 
-    protected async createUser(req: Request, res: Response): Promise<void> {
-        try {
-            const {nickname, password, email} = req.body;
-            const user = await this.authService.singUp(nickname, email, password);
-            res.status(200).json(user);
-        } catch (err) {
-            if (err instanceof UserError) {
-                const code: number = 400 + err.statusCode;
-                res.status(code).json({ message: err.message });
-            } else {
-                res.status(500).end();
-            }
-        }
+    private async createUser(req: Request, res: Response, next: NextFunction): Promise<void> {
+        const {nickname, password, email} = req.body;
+        const user = await this.authService.singUp(nickname, email, password);
+        res.status(200).json(user);
     }
 }

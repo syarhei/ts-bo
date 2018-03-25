@@ -13,10 +13,11 @@ import {UserController} from "../src/routes/UserController";
 import {MainController} from "../src/routes/MainController";
 import {UserDAL} from "../src/DAL/UserDAL";
 import {AuthService} from "../src/services/AuthService";
+import {getConfigEnvironment} from "./utils/env";
 
-const ENV: string = process.env.NODE_ENV === "production" ? "master" : "local";
-const config: IConfig = require(`../../configs/${ENV}/config.json`);
-const key: IKey = require(`../../configs/${ENV}/key.json`);
+const environment: string = getConfigEnvironment();
+const config: IConfig = require(`../../configs/${environment}/config.json`);
+const key: IKey = require(`../../configs/${environment}/key.json`);
 
 const container = new Container();
 

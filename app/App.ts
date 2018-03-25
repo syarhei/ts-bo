@@ -6,6 +6,7 @@ import {DATABASE_CONTEXT, MAIN_CONTROLLER} from "./inversify/identifiers/common"
 import {DBContext} from "./DBContext";
 import {MainController} from "./src/routes/MainController";
 import * as bodyParser from "body-parser";
+import {ErrorHandler} from "./src/middlewares/ErrorHandler";
 
 @injectable()
 export class App {
@@ -25,6 +26,7 @@ export class App {
         this.app.use(bodyParser.json({}));
         this.app.use(bodyParser.urlencoded({ extended: true }));
         this.app.use("/api", this.mainController.router);
+        this.app.use("/api", ErrorHandler.middleware);
     }
 
     async sync(): Promise<void> {
@@ -32,13 +34,9 @@ export class App {
     }
 
     async start(): Promise<void> {
-        try {
-            const listenAsync: (port: number) => Bluebird<void> =
-                Bluebird.promisify<void, number>(this.app.listen, {context: this.app});
-            await listenAsync(this.port);
-            console.log(`Server is starting on ${this.port} port`);
-        } catch(err) {
-            console.log(err);
-        }
+        const listenAsync: (port: number) => Bluebird<void> =
+            Bluebird.promisify<void, number>(this.app.listen, {context: this.app});
+        await listenAsync(this.port);
+        console.log(`Server is starting on ${this.port} port`);
     }
 }
