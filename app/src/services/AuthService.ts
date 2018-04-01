@@ -26,7 +26,16 @@ export class AuthService {
         }
 
         const userData: User = {
+            id: null,
             nickname: nickname,
+            firstName: null,
+            lastName: null,
+            country: null,
+            city: null,
+            address: null,
+            GTM: 3,
+            mobilePhone: "+112422151",
+            dayOfBirthDay: 421526161,
             balance: 1000,
             email: email,
             role: "user",
