@@ -18,7 +18,7 @@ export class TeamModel {
     public get model(): sequelize.Model<sequelize.Instance<Team>, Team> {
         return this.connection.define<sequelize.Instance<Team>, Team>(USER_TABLE, {
             "id": {
-                type: STRING(30),
+                type: STRING(36),
                 primaryKey: true
             },
             "name": {

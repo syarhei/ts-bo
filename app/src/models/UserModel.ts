@@ -18,7 +18,7 @@ export class UserModel {
     public get model(): sequelize.Model<sequelize.Instance<User>, User> {
         return this.connection.define<sequelize.Instance<User>, User>(USER_TABLE, {
             "id": {
-                type: STRING(30),
+                type: STRING(36),
                 primaryKey: true
             },
             "nickname": {

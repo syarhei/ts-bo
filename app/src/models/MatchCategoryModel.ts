@@ -18,7 +18,7 @@ export class MatchCategoryModel {
     public get model(): sequelize.Model<sequelize.Instance<MatchCategory>, MatchCategory> {
         return this.connection.define<sequelize.Instance<MatchCategory>, MatchCategory>(USER_TABLE, {
             "id": {
-                type: STRING(30),
+                type: STRING(36),
                 primaryKey: true
             },
             "name": {

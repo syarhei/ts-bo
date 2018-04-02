@@ -22,7 +22,7 @@ export class MatchModel {
     public get model(): sequelize.Model<sequelize.Instance<Match>, Match> {
         return this.connection.define<sequelize.Instance<Match>, Match>(USER_TABLE, {
             "id": {
-                type: STRING(30),
+                type: STRING(36),
                 primaryKey: true
             },
             "teamHome": {

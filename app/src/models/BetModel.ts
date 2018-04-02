@@ -1,4 +1,4 @@
-import {STRING, BOOLEAN, Sequelize, default as sequelize} from "sequelize";
+import {STRING, INTEGER, BOOLEAN, Sequelize, default as sequelize} from "sequelize";
 import {injectable, inject} from "inversify";
 import {DATABASE_CONNECTION, MATCH_MODEL, USER_MODEL} from "../../inversify/identifiers/common";
 import {DBConnection} from "../../DBConnection";
@@ -22,7 +22,7 @@ export class BetModel {
     public get model(): sequelize.Model<sequelize.Instance<Bet>, Bet> {
         return this.connection.define<sequelize.Instance<Bet>, Bet>(USER_TABLE, {
             "id": {
-                type: STRING(30),
+                type: STRING(36),
                 primaryKey: true
             },
             "matchId": {
@@ -39,7 +39,25 @@ export class BetModel {
                     key: "id"
                 }
             },
-
+            "cost": {
+                type: INTEGER,
+                allowNull: false
+            },
+            "result": {
+                type: STRING(2),
+                validate: {
+                    isIn: [
+                        [ "W1", "D", "W2" ]
+                    ]
+                }
+            },
+            "isFinished": {
+                type: BOOLEAN,
+                defaultValue: false
+            },
+            "difference": {
+                type: INTEGER
+            }
         }, {});
     }
 }
