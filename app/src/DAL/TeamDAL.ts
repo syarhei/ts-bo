@@ -18,7 +18,7 @@ export class TeamDAL {
 
     public async getTeamById(id: string): Promise<Team> {
         const team = await this.team.findById(id);
-        return team.get();
+        return team ? team.get() : null;
     }
 
     public async getTeams(): Promise<Team[]> {
@@ -26,9 +26,9 @@ export class TeamDAL {
         return teams.map(team => team.get());
     }
 
-    public async updateTeam(id: string, teamOptions: Team): Promise<Team> {
-        const [, [team]] = await this.team.update(teamOptions, {where: { id }});
-        return team.get();
+    public async updateTeam(id: string, teamOptions: Team): Promise<boolean> {
+        const [number] = await this.team.update(teamOptions, {where: { id }});
+        return number > 0;
     }
 
     public async deleteTeam(id: string): Promise<boolean> {

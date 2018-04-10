@@ -7,5 +7,5 @@ export interface MatchCategory {
     description?: string;
     isContinental: boolean;
     country?: string;
-    isFinished: boolean;
+    isFinished?: boolean;
 }

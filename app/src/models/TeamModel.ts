@@ -39,6 +39,7 @@ export class TeamModel {
             },
             "wins": {
                 type: sequelize.INTEGER,
+                defaultValue: 0
             },
             "draws": {
                 type: sequelize.INTEGER,
@@ -48,6 +49,8 @@ export class TeamModel {
                 type: sequelize.INTEGER,
                 defaultValue: 0
             }
-        }, {});
+        }, {
+            timestamps: false
+        });
     }
 }

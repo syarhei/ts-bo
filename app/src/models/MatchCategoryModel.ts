@@ -40,6 +40,8 @@ export class MatchCategoryModel {
                 type: BOOLEAN,
                 defaultValue: false
             }
-        }, {});
+        }, {
+            timestamps: false
+        });
     }
 }

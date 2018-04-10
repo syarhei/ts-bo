@@ -68,6 +68,8 @@ export class MatchModel {
             "result": {
                 type: STRING(2)
             }
-        }, {});
+        }, {
+            timestamps: false
+        });
     }
 }

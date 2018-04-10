@@ -5,7 +5,7 @@ export interface Team {
     owner: string;
     country: string;
     year: number;
-    wins: number;
-    draws: number;
-    loses: number;
+    wins?: number;
+    draws?: number;
+    loses?: number;
 }

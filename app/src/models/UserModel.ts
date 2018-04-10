@@ -72,6 +72,8 @@ export class UserModel {
                 type: STRING(5),
                 allowNull: false
             }
-        }, {});
+        }, {
+            timestamps: false
+        });
     }
 }

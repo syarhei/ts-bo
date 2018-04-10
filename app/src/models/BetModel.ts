@@ -58,6 +58,8 @@ export class BetModel {
             "difference": {
                 type: INTEGER
             }
-        }, {});
+        }, {
+            timestamps: false
+        });
     }
 }

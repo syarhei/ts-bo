@@ -1,10 +1,10 @@
 import {RESULTS_ENUM} from "./Bet";
 
 export interface Match {
-    id: number;
-    teamHomeId: number;
-    teamGuestId: number;
-    matchCategoryId: number;
+    id: string;
+    teamHomeId: string;
+    teamGuestId: string;
+    matchCategoryId: string;
     coefficientWin1: number;
     coefficientDraw: number;
     coefficientWin2: number;
@@ -16,7 +16,7 @@ export interface Match {
     // total5?: number;
     // total6?: number;
     place: string;
-    date: string;
+    date: number;
     result?: RESULTS_ENUM;
     homeGoals?: number;
     guestGoals?: number;

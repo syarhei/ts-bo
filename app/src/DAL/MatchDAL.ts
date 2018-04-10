@@ -16,8 +16,8 @@ export class MatchDAL {
         return match.get();
     }
 
-    public async searchLastMatches(teamId: string, limit: number = 10) {
-        const result = await this.match.findAll({
+    public async searchLastMatches(teamId: string, limit: number = 10): Promise<Match[]> {
+        const matches = await this.match.findAll({
             where: {
                 [sequelize.Op.or]: [
                     { teamHomeId: teamId },
@@ -28,11 +28,12 @@ export class MatchDAL {
             limit: limit,
             offset: 0
         });
+        return matches.map(match => match.get());
     }
 
-    public async updateMatchProps(id: string, matchOptions: Match): Promise<Match> {
-        const [, [match]] = await this.match.update(matchOptions, {where: { id }});
-        return match.get();
+    public async updateMatchProps(id: string, matchOptions: Match): Promise<boolean> {
+        const [number] = await this.match.update(matchOptions, {where: { id }});
+        return number > 0;
     }
 
     public async deleteMatchById(id: string): Promise<boolean> {
