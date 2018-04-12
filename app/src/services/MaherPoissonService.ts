@@ -1,6 +1,7 @@
 import {inject, injectable} from "inversify";
 import {IConfig} from "../../IConfig";
 import {CONFIG} from "../../inversify/identifiers/common";
+import {convertSumToInteger} from "../../utils/math";
 
 type MaherPoissonEntity = { homeGoals: number; guestGoals: number; probability: number; };
 
@@ -46,12 +47,7 @@ export class MaherPoissonService {
             .filter(({homeGoals, guestGoals}: MaherPoissonEntity) => homeGoals < guestGoals)
             .reduce<number>((memory: number, value) => memory + value.probability, 0);
 
-        const sum = win1 + draw + win2;
-
-        // Transform to valid probability (sum of 3 coefficients should be equal 1)
-        win1 = win1 / sum;
-        draw = draw / sum;
-        win2 = win2 / sum;
+        ([win1, draw, win2] = convertSumToInteger(1, win1, draw, win2));
 
         return { win1, draw, win2 };
     }
