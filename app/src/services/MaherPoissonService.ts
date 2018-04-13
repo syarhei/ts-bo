@@ -2,11 +2,13 @@ import {inject, injectable} from "inversify";
 import {IConfig} from "../../IConfig";
 import {CONFIG} from "../../inversify/identifiers/common";
 
+type MaherPoissonEntity = { homeGoals: number; guestGoals: number; probability: number; };
+
 @injectable()
 export class MaherPoissonService {
-    private place: number = null;
-    private TABLE_SIZE: number = null;
-    private maherPoissonTable: { homeGoals: number, guestGoals: number, probability: number }[] = [];
+    private readonly place: number = null;
+    private readonly TABLE_SIZE: number = null;
+    private maherPoissonTable: MaherPoissonEntity[] = [];
 
     constructor(@inject(CONFIG) private config: IConfig) {
         this.place = config.MAHER_POISSON_HOME_PLACE_COEFFICIENT;
@@ -27,21 +29,21 @@ export class MaherPoissonService {
         const home: number = Math.log(this.place + homeAttack + awayDefence);
         const away: number = Math.log(awayAttack + homeDefence);
 
-        for (let homeGoals = 0; homeGoals < this.TABLE_SIZE; homeGoals++) {
-            for (let guestGoals = 0; guestGoals < this.TABLE_SIZE; guestGoals++) {
+        for (let homeGoals: number = 0; homeGoals < this.TABLE_SIZE; homeGoals++) {
+            for (let guestGoals: number = 0; guestGoals < this.TABLE_SIZE; guestGoals++) {
                 const probability: number = this.calculateProbability(home, homeGoals, away, guestGoals);
                 this.maherPoissonTable.push({ homeGoals, guestGoals, probability });
             }
         }
 
         let win1: number = this.maherPoissonTable
-            .filter(({homeGoals, guestGoals}) => homeGoals > guestGoals)
+            .filter(({homeGoals, guestGoals}: MaherPoissonEntity) => homeGoals > guestGoals)
             .reduce<number>((memory: number, value) => memory + value.probability, 0);
         let draw: number = this.maherPoissonTable
-            .filter(({homeGoals, guestGoals}) => homeGoals === guestGoals)
+            .filter(({homeGoals, guestGoals}: MaherPoissonEntity) => homeGoals === guestGoals)
             .reduce<number>((memory: number, value) => memory + value.probability, 0);
         let win2: number = this.maherPoissonTable
-            .filter(({homeGoals, guestGoals}) => homeGoals < guestGoals)
+            .filter(({homeGoals, guestGoals}: MaherPoissonEntity) => homeGoals < guestGoals)
             .reduce<number>((memory: number, value) => memory + value.probability, 0);
 
         const sum = win1 + draw + win2;
@@ -59,6 +61,7 @@ export class MaherPoissonService {
             ((Math.pow(Math.E, -away) * Math.pow(away, awayGoals)) / this.getFactorial(awayGoals));
     }
 
+    // TODO: replace using library (npm)
     private getFactorial(value: number): number {
         return value ? value * this.getFactorial(value - 1) : 1;
     }
