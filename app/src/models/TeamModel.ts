@@ -23,7 +23,7 @@ export class TeamModel {
             },
             "name": {
                 type: sequelize.STRING(20),
-                unique: true
+                allowNull: false
             },
             "owner": {
                 type: sequelize.STRING(20),

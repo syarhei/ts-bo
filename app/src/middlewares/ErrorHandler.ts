@@ -1,5 +1,6 @@
 import {ErrorRequestHandler, NextFunction, Request, Response} from "express";
 import {UserError} from "../models/exceptions/UserError";
+import {TeamError} from "../models/exceptions/TeamError";
 
 export class ErrorHandler {
     constructor() {}
@@ -8,10 +9,22 @@ export class ErrorHandler {
         if (err instanceof UserError) {
             const code: number = 400 + err.statusCode;
             res.status(code).json({ message: err.message });
-        } else {
-            console.log(err);
-            res.status(500).end();
+            return;
         }
-        return;
+
+        if (err instanceof TeamError) {
+            switch (err.statusCode) {
+                case 1:
+                    res.status(404).json({ message: err.message });
+                    break;
+                default:
+                    console.log(`Unhandled TeamError: "${err.message}"`);
+                    res.status(500).end();
+            }
+            return;
+        }
+
+        res.status(500).end();
+        console.log(err);
     }
 }

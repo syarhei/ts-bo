@@ -1,2 +1,2 @@
-import "./match/MaherPoissonGeneration";
+import "./MathModels/MaherPoissonGeneration";
 import "./MathModels/SumConvertationToInteger";

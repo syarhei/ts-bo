@@ -4,8 +4,9 @@ import {
     APPLICATION, AUTH_SERVICE, BET_MODEL, COEFFICIENT_SERVICE, CONFIG, DATABASE_CONNECTION, DATABASE_CONTEXT, KEY,
     MAHER_POISSON_SERVICE,
     MAIN_CONTROLLER,
-    MATCH_CATEGORY_DAL, MATCH_CATEGORY_MODEL, MATCH_CONTROLLER, MATCH_DAL, MATCH_MODEL, MATCH_SERVICE, TEAM_DAL,
-    TEAM_MODEL,
+    MATCH_CATEGORY_DAL, MATCH_CATEGORY_MODEL, MATCH_CONTROLLER, MATCH_DAL, MATCH_MODEL, MATCH_SERVICE, TEAM_CONTROLLER,
+    TEAM_DAL,
+    TEAM_MODEL, TEAM_SERVICE,
     USER_CONTROLLER,
     USER_DAL, USER_MODEL
 } from "./identifiers/common";
@@ -30,6 +31,8 @@ import {CoefficientService} from "../src/services/CoefficientService";
 import {MaherPoissonService} from "../src/services/MaherPoissonService";
 import {MatchController} from "../src/routes/MatchController";
 import {MatchDAL} from "../src/DAL/MatchDAL";
+import {TeamService} from "../src/services/TeamService";
+import {TeamController} from "../src/routes/TeamController";
 
 const environment: string = getConfigEnvironment();
 const config: IConfig = require(`../../configs/${environment}/config.json`);
@@ -53,10 +56,12 @@ container.bind<MatchDAL>(MATCH_DAL).to(MatchDAL);
 container.bind<UserDAL>(USER_DAL).to(UserDAL);
 
 container.bind<AuthService>(AUTH_SERVICE).to(AuthService);
+container.bind<TeamService>(TEAM_SERVICE).to(TeamService);
 container.bind<MatchService>(MATCH_SERVICE).to(MatchService);
 container.bind<MaherPoissonService>(MAHER_POISSON_SERVICE).to(MaherPoissonService);
 container.bind<CoefficientService>(COEFFICIENT_SERVICE).to(CoefficientService);
 
+container.bind<TeamController>(TEAM_CONTROLLER).to(TeamController);
 container.bind<MatchController>(MATCH_CONTROLLER).to(MatchController);
 container.bind<UserController>(USER_CONTROLLER).to(UserController);
 container.bind<MainController>(MAIN_CONTROLLER).to(MainController);
