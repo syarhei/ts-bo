@@ -4,7 +4,7 @@ import {
     APPLICATION, PASSPORT_HANDLER, AUTH_SERVICE, BET_MODEL, COEFFICIENT_SERVICE, CONFIG, DATABASE_CONNECTION,
     DATABASE_CONTEXT, KEY, MAHER_POISSON_SERVICE, MAIN_CONTROLLER, MATCH_CATEGORY_DAL, MATCH_CATEGORY_MODEL,
     MATCH_CONTROLLER, MATCH_DAL, MATCH_MODEL, MATCH_SERVICE, PASSPORT, SESSION_CONTROLLER, TEAM_CONTROLLER, TEAM_DAL,
-    TEAM_MODEL, TEAM_SERVICE, USER_CONTROLLER, USER_DAL, AUTH_HANDLER, USER_MODEL
+    TEAM_MODEL, TEAM_SERVICE, USER_CONTROLLER, USER_DAL, AUTH_HANDLER, USER_MODEL, USER_SERVICE
 } from "./identifiers/common";
 import {IConfig, IKey} from "../IConfig";
 import {DBContext} from "../DBContext";
@@ -33,6 +33,7 @@ import * as passport from "passport";
 import {PassportHandler} from "../src/middlewares/PassportHandler";
 import {SessionController} from "../src/routes/SessionController";
 import {AuthHandler} from "../src/middlewares/AuthHandler";
+import {UserService} from "../src/services/UserService";
 
 const environment: string = getConfigEnvironment();
 const config: IConfig = require(`../../configs/${environment}/config.json`);
@@ -57,6 +58,7 @@ container.bind<MatchDAL>(MATCH_DAL).to(MatchDAL);
 container.bind<UserDAL>(USER_DAL).to(UserDAL);
 
 container.bind<AuthService>(AUTH_SERVICE).to(AuthService);
+container.bind<UserService>(USER_SERVICE).to(UserService);
 container.bind<TeamService>(TEAM_SERVICE).to(TeamService);
 container.bind<MatchService>(MATCH_SERVICE).to(MatchService);
 container.bind<MaherPoissonService>(MAHER_POISSON_SERVICE).to(MaherPoissonService);
