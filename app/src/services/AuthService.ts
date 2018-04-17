@@ -44,4 +44,15 @@ export class AuthService {
 
         return this.userDAL.createUser(userData);
     }
+
+    public async logIn(nickname: string, password: string): Promise<User> {
+        const [user]: User[] = await this.userDAL.getUsersByNickName(nickname);
+        if (!user) {
+            throw new UserError(`User is not found by nickname`);
+        }
+        if (user.password !== password) {
+            throw new UserError(`User's password is not correct`);
+        }
+        return user;
+    }
 }

@@ -2,6 +2,7 @@ export const CONFIG: symbol = Symbol("CONFIG");
 export const KEY: symbol = Symbol("KEY");
 export const DATABASE_CONNECTION: symbol = Symbol("DATABASE_CONNECTION");
 export const DATABASE_CONTEXT: symbol = Symbol("DATABASE_CONTEXT");
+export const PASSPORT: symbol = Symbol("PASSPORT");
 
 export const TEAM_MODEL: symbol = Symbol("TEAM_MODEL");
 export const MATCH_CATEGORY_MODEL: symbol = Symbol("MATCH_CATEGORY_MODEL");
@@ -23,6 +24,9 @@ export const COEFFICIENT_SERVICE: symbol = Symbol("COEFFICIENT_SERVICE");
 export const TEAM_CONTROLLER: symbol = Symbol("TEAM_CONTROLLER");
 export const MATCH_CONTROLLER: symbol = Symbol("MATCH_CONTROLLER");
 export const USER_CONTROLLER: symbol = Symbol("USER_CONTROLLER");
+export const SESSION_CONTROLLER: symbol = Symbol("SESSION_CONTROLLER");
 export const MAIN_CONTROLLER: symbol = Symbol("MAIN_CONTROLLER");
 
+export const PASSPORT_HANDLER: symbol = Symbol("PASSPORT_HANDLER");
+export const AUTH_HANDLER: symbol = Symbol("AUTH_HANDLER");
 export const APPLICATION: symbol = Symbol("APPLICATION");
