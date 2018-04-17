@@ -4,6 +4,8 @@ import {UserDAL} from "../DAL/UserDAL";
 import {User} from "../models/contracts/User";
 import * as Bluebird from "bluebird";
 import {UserError} from "../models/exceptions/UserError";
+import uuid = require("uuid");
+import {USER_ROLE_NAME} from "../middlewares/AuthHandler";
 
 @injectable()
 export class AuthService {
@@ -11,35 +13,35 @@ export class AuthService {
         @inject(USER_DAL) private userDAL: UserDAL
     ) {}
 
-    public async singUp(nickname: string, email: string, password: string): Promise<User> {
+    public async singUp(userOptions: User): Promise<User> {
         const [usersWithNickname, usersWithEmail] = await Bluebird.all<User[], User[]>([
-            this.userDAL.getUsersByNickName(nickname),
-            this.userDAL.getUsersByEmail(email)
+            this.userDAL.getUsersByNickName(userOptions.nickname),
+            this.userDAL.getUsersByEmail(userOptions.email)
         ]);
 
         if (usersWithNickname.length) {
-            throw new UserError(`This nickname already exists`, 4);
+            throw new UserError(`This nickname already exists`);
         }
 
         if (usersWithEmail.length) {
-            throw new UserError(`This email already is used in the system`, 4);
+            throw new UserError(`This email already is used in the system`);
         }
 
         const userData: User = {
-            id: null,
-            nickname: nickname,
-            firstName: null,
-            lastName: null,
-            country: null,
-            city: null,
-            address: null,
-            GTM: 3,
-            mobilePhone: "+112422151",
-            dayOfBirthDay: 421526161,
+            id: uuid(),
+            nickname: userOptions.nickname,
+            firstName: userOptions.firstName,
+            lastName: userOptions.lastName,
+            country: userOptions.country,
+            city: userOptions.city,
+            address: userOptions.address,
+            GTM: userOptions.GTM ? userOptions.GTM : 3,
+            mobilePhone: userOptions.mobilePhone,
+            dayOfBirthDay: userOptions.dayOfBirthDay,
             balance: 1000,
-            email: email,
-            role: "user",
-            password: password
+            email: userOptions.email,
+            role: USER_ROLE_NAME,
+            password: userOptions.password
         };
 
         return this.userDAL.createUser(userData);
@@ -48,10 +50,10 @@ export class AuthService {
     public async logIn(nickname: string, password: string): Promise<User> {
         const [user]: User[] = await this.userDAL.getUsersByNickName(nickname);
         if (!user) {
-            throw new UserError(`User is not found by nickname`);
+            throw new UserError(`User is not found by nickname`, 1);
         }
         if (user.password !== password) {
-            throw new UserError(`User's password is not correct`);
+            throw new UserError(`User's password is not correct`, 1);
         }
         return user;
     }

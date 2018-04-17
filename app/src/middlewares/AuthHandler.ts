@@ -4,8 +4,8 @@ import {User} from "../models/contracts/User";
 import {AuthError} from "../models/exceptions/AuthError";
 import * as autoBind from "auto-bind";
 
-const ADMIN_TYPE: string = "admin";
-const USER_TYPE: string = "user";
+const ADMIN_ROLE_NAME: string = "admin";
+export const USER_ROLE_NAME: string = "user";
 
 @injectable()
 export class AuthHandler {
@@ -14,11 +14,11 @@ export class AuthHandler {
     }
 
     public userAuth(req: Request, res: Response, next: NextFunction): void {
-        this.middleware([USER_TYPE, ADMIN_TYPE], req, res, next);
+        this.middleware([USER_ROLE_NAME, ADMIN_ROLE_NAME], req, res, next);
     }
 
     public adminAuth(req: Request, res: Response, next: NextFunction): void {
-        this.middleware([ADMIN_TYPE], req, res, next);
+        this.middleware([ADMIN_ROLE_NAME], req, res, next);
     }
 
     private middleware(roles: string[], req: Request, res: Response, next: NextFunction): void {
