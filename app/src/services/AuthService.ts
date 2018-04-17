@@ -6,6 +6,7 @@ import * as Bluebird from "bluebird";
 import {UserError} from "../models/exceptions/UserError";
 import uuid = require("uuid");
 import {USER_ROLE_NAME} from "../middlewares/AuthHandler";
+import {UserOptionsForCreate} from "../models/contracts/user/UserOptionsForCreate";
 
 @injectable()
 export class AuthService {
@@ -13,7 +14,7 @@ export class AuthService {
         @inject(USER_DAL) private userDAL: UserDAL
     ) {}
 
-    public async singUp(userOptions: User): Promise<User> {
+    public async singUp(userOptions: UserOptionsForCreate): Promise<User> {
         const [usersWithNickname, usersWithEmail] = await Bluebird.all<User[], User[]>([
             this.userDAL.getUsersByNickName(userOptions.nickname),
             this.userDAL.getUsersByEmail(userOptions.email)

@@ -15,4 +15,11 @@ export class UserService {
         }
         return user;
     }
+
+    public async deleteUserById(userId: string): Promise<void> {
+        const isDeleted: boolean = await this.userDAL.deleteUser(userId);
+        if (!isDeleted) {
+            throw new UserError(`User is not deleted`, 1);
+        }
+    }
 }

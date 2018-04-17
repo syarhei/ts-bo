@@ -6,13 +6,15 @@ import {TeamService} from "../services/TeamService";
 import {Team} from "../models/contracts/Team";
 import {TeamError} from "../models/exceptions/TeamError";
 import {TeamOptionsForUpdate} from "../models/contracts/team/TeamOptionsForUpdate";
-import {TEAM_SERVICE} from "../../inversify/identifiers/common";
+import {AUTH_HANDLER, TEAM_SERVICE} from "../../inversify/identifiers/common";
 import * as wrap from "express-async-wrap";
+import {AuthHandler} from "../middlewares/AuthHandler";
 
 @injectable()
 export class TeamController {
     constructor(
-        @inject(TEAM_SERVICE) private teamService: TeamService
+        @inject(TEAM_SERVICE) private teamService: TeamService,
+        @inject(AUTH_HANDLER) private authHandler: AuthHandler
     ) {
         autoBind(this);
     }
@@ -22,10 +24,10 @@ export class TeamController {
     public get router(): Router {
         const router = Router();
 
-        router.post("/teams", wrap(this.createTeam));
+        router.post("/teams", this.authHandler.adminAuth, wrap(this.createTeam));
         router.get("/teams/:teamId", wrap(this.getTeam));
-        router.put("/teams/:teamId", wrap(this.updateTeam));
-        router.delete("/teams/:teamId", wrap(this.deleteTeam));
+        router.put("/teams/:teamId", this.authHandler.adminAuth, wrap(this.updateTeam));
+        router.delete("/teams/:teamId", this.authHandler.adminAuth, wrap(this.deleteTeam));
 
         return router;
     }
