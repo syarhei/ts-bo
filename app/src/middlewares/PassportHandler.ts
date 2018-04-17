@@ -7,6 +7,7 @@ import {UserError} from "../models/exceptions/UserError";
 import {Strategy as LocalStrategy} from "passport-local";
 import {AuthService} from "../services/AuthService";
 import {PASSPORT_STRATEGY_NAME} from "../../types/common";
+import {UserForPassport} from "../models/contracts/user/UserForPassport";
 
 @injectable()
 export class PassportHandler {
@@ -17,26 +18,36 @@ export class PassportHandler {
     ) {}
 
     public serialize() {
-        this.passport.serializeUser<User, string>((user, done) => {
+        this.passport.serializeUser<UserForPassport, string>((user, done) => {
             done(null, user.id);
         });
     }
 
     public deserialize() {
-        this.passport.deserializeUser<User, string>(async (userId, done) => {
+        this.passport.deserializeUser<UserForPassport, string>(async (userId, done) => {
             const user: User = await this.userDAL.getUserById(userId);
             if (!user) {
                 done(new UserError(`User is not found`, 1));
             }
-            done(null, user);
+            const userForPassport: UserForPassport = {
+                id: user.id,
+                nickname: user.nickname,
+                role: user.role
+            };
+            done(null, userForPassport);
         });
     }
 
     public init() {
         this.passport.use(PASSPORT_STRATEGY_NAME, new LocalStrategy(async (nickame, password, done) => {
             try {
-                const user = await this.authService.logIn(nickame, password);
-                done(null, user);
+                const user: User = await this.authService.logIn(nickame, password);
+                const userForPassport: UserForPassport = {
+                    id: user.id,
+                    nickname: user.nickname,
+                    role: user.role
+                };
+                done(null, userForPassport);
             } catch (err) {
                 done(err);
             }

@@ -22,6 +22,7 @@ export class SessionController {
         const router = Router();
         router.post("/sessions", this.passport.authenticate(PASSPORT_STRATEGY_NAME), wrap(this.createSession));
         router.delete("/sessions", this.auth.userAuth, wrap(this.deleteSession));
+
         return router;
     }
 
