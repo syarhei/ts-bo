@@ -4,12 +4,14 @@ import {MatchCategoryDAL} from "../DAL/MatchCategoryDAL";
 import {MatchCategory} from "../contracts/MatchCategory";
 import uuid = require("uuid");
 import {MatchCategoryError} from "../exceptions/MatchCategoryError";
+import {MatchCategoryOptionsForCreate} from "../contracts/match-category/MatchCategoryOptionsForCreate";
+import {MatchCategoryOptionsForUpdate} from "../contracts/match-category/MatchCategoryOptionsForUpdate";
 
 @injectable()
 export class MatchCategoryService {
     constructor(@inject(MATCH_CATEGORY_DAL) private categoryDAL: MatchCategoryDAL) {}
 
-    public async createCategory(categoryOptions: MatchCategory): Promise<MatchCategory> {
+    public async createCategory(categoryOptions: MatchCategoryOptionsForCreate): Promise<MatchCategory> {
         const category: MatchCategory = {
             id: uuid(),
             name: categoryOptions.name,
@@ -33,7 +35,7 @@ export class MatchCategoryService {
         return category;
     }
 
-    public async updateCategoryById(categoryId: string, categoryOptions: MatchCategory): Promise<void> {
+    public async updateCategoryById(categoryId: string, categoryOptions: MatchCategoryOptionsForUpdate): Promise<void> {
         const category: MatchCategory = await this.getCategoryById(categoryId);
         const data: MatchCategory = {
             name: categoryOptions.name ? categoryOptions.name : category.name,

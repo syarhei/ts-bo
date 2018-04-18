@@ -3,6 +3,7 @@ import {UserError} from "../exceptions/UserError";
 import {TeamError} from "../exceptions/TeamError";
 import {AuthError} from "../exceptions/AuthError";
 import {MatchError} from "../exceptions/MatchError";
+import {MatchCategoryError} from "../exceptions/MatchCategoryError";
 
 export class ErrorHandler {
     constructor() {}
@@ -45,6 +46,18 @@ export class ErrorHandler {
                     break;
                 default:
                     console.log(`Unhandled TeamError: "${err.message}"`);
+                    res.status(500).end();
+            }
+            return;
+        }
+
+        if (err instanceof MatchCategoryError) {
+            switch (err.statusCode) {
+                case 1:
+                    res.status(404).json({ message: err.message });
+                    break;
+                default:
+                    console.log(`Unhandled MatchCategoryError: "${err.message}"`);
                     res.status(500).end();
             }
             return;

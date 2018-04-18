@@ -4,7 +4,8 @@ import {
     APPLICATION, PASSPORT_HANDLER, AUTH_SERVICE, BET_MODEL, COEFFICIENT_SERVICE, CONFIG, DATABASE_CONNECTION,
     DATABASE_CONTEXT, KEY, MAHER_POISSON_SERVICE, MAIN_CONTROLLER, MATCH_CATEGORY_DAL, MATCH_CATEGORY_MODEL,
     MATCH_CONTROLLER, MATCH_DAL, MATCH_MODEL, MATCH_SERVICE, PASSPORT, SESSION_CONTROLLER, TEAM_CONTROLLER, TEAM_DAL,
-    TEAM_MODEL, TEAM_SERVICE, USER_CONTROLLER, USER_DAL, AUTH_HANDLER, USER_MODEL, USER_SERVICE
+    TEAM_MODEL, TEAM_SERVICE, USER_CONTROLLER, USER_DAL, AUTH_HANDLER, USER_MODEL, USER_SERVICE, MATCH_CATEGORY_SERVICE,
+    MATCH_CATEGORY_CONTROLLER
 } from "./identifiers/common";
 import {IConfig} from "../types/IConfig";
 import {IKey} from "../types/IKey";
@@ -35,6 +36,8 @@ import {PassportHandler} from "../src/middlewares/PassportHandler";
 import {SessionController} from "../src/routes/SessionController";
 import {AuthHandler} from "../src/middlewares/AuthHandler";
 import {UserService} from "../src/services/UserService";
+import {MatchCategoryService} from "../src/services/MatchCategoryService";
+import {MatchCategoryController} from "../src/routes/MatchCategoryController";
 
 const environment: string = getConfigEnvironment();
 const config: IConfig = require(`../../configs/${environment}/config.json`);
@@ -61,11 +64,13 @@ container.bind<UserDAL>(USER_DAL).to(UserDAL);
 container.bind<AuthService>(AUTH_SERVICE).to(AuthService);
 container.bind<UserService>(USER_SERVICE).to(UserService);
 container.bind<TeamService>(TEAM_SERVICE).to(TeamService);
+container.bind<MatchCategoryService>(MATCH_CATEGORY_SERVICE).to(MatchCategoryService);
 container.bind<MatchService>(MATCH_SERVICE).to(MatchService);
 container.bind<MaherPoissonService>(MAHER_POISSON_SERVICE).to(MaherPoissonService);
 container.bind<CoefficientService>(COEFFICIENT_SERVICE).to(CoefficientService);
 
 container.bind<TeamController>(TEAM_CONTROLLER).to(TeamController);
+container.bind<MatchCategoryController>(MATCH_CATEGORY_CONTROLLER).to(MatchCategoryController);
 container.bind<MatchController>(MATCH_CONTROLLER).to(MatchController);
 container.bind<UserController>(USER_CONTROLLER).to(UserController);
 container.bind<SessionController>(SESSION_CONTROLLER).to(SessionController);

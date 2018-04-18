@@ -18,11 +18,13 @@ export const USER_DAL: symbol = Symbol("USER_DAL");
 export const AUTH_SERVICE: symbol = Symbol("AUTH_SERVICE");
 export const USER_SERVICE: symbol = Symbol("USER_SERVICE");
 export const TEAM_SERVICE: symbol = Symbol("TEAM_SERVICE");
+export const MATCH_CATEGORY_SERVICE: symbol = Symbol("MATCH_CATEGORY_SERVICE");
 export const MATCH_SERVICE: symbol = Symbol("MATCH_SERVICE");
 export const MAHER_POISSON_SERVICE: symbol = Symbol("MAHER_POISSON_SERVICE");
 export const COEFFICIENT_SERVICE: symbol = Symbol("COEFFICIENT_SERVICE");
 
 export const TEAM_CONTROLLER: symbol = Symbol("TEAM_CONTROLLER");
+export const MATCH_CATEGORY_CONTROLLER: symbol = Symbol("MATCH_CATEGORY_CONTROLLER");
 export const MATCH_CONTROLLER: symbol = Symbol("MATCH_CONTROLLER");
 export const USER_CONTROLLER: symbol = Symbol("USER_CONTROLLER");
 export const SESSION_CONTROLLER: symbol = Symbol("SESSION_CONTROLLER");

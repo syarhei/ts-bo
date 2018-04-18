@@ -1,3 +1,4 @@
 import "./main";
 import "./auth";
-import "./team/team";
+import "./team";
+import "./category";

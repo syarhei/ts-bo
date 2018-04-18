@@ -1,17 +1,17 @@
-import {TeamOptionsForCreate} from "../../../src/contracts/team/TeamOptionsForCreate";
+import {TeamOptionsForCreate} from "../../src/contracts/team/TeamOptionsForCreate";
 import {Response} from "request";
-import {Team} from "../../../src/contracts/Team";
+import {Team} from "../../src/contracts/Team";
 import {assert} from "chai";
-import {TeamOptionsForUpdate} from "../../../src/contracts/team/TeamOptionsForUpdate";
-import {admin, user1} from "../../TestEnvironment";
+import {TeamOptionsForUpdate} from "../../src/contracts/team/TeamOptionsForUpdate";
+import {admin, user1} from "../TestEnvironment";
 
 const TEAM_NAME_1 = `Team-Test-1`;
 const TEAM_NAME_2 = `Team-Test-2`;
 
-describe("Team Operations", async () => {
+describe("Team's Operations", async () => {
     let teamId: string = null;
 
-    it("Create team", async () => {
+    it("Create Team", async () => {
         const teamOptions: TeamOptionsForCreate = {
             name: TEAM_NAME_1,
             owner: "Siarhei Murkou",
@@ -25,7 +25,7 @@ describe("Team Operations", async () => {
         teamId = team.id;
     });
 
-    it("Check Team after Creation", async () => {
+    it("Check Team after creation", async () => {
         const result: Response = await user1.get(`api/teams/${teamId}`);
         const team: Team = result.body;
         assert.deepEqual(result.statusCode, 200);
@@ -47,12 +47,12 @@ describe("Team Operations", async () => {
         assert.deepEqual(team.name, TEAM_NAME_2);
     });
 
-    it("Delete team", async () => {
+    it("Delete Team", async () => {
         const result: Response = await admin.del(`/api/teams/${teamId}`);
         assert.deepEqual(result.statusCode, 204);
     });
 
-    it("Check team after deleting", async () => {
+    it("Check Team after deleting", async () => {
         const result: Response = await user1.get(`/api/teams/${teamId}`);
         assert.deepEqual(result.statusCode, 404);
     });
