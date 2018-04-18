@@ -2,11 +2,14 @@ import {admin, user1} from "../TestEnvironment";
 import {assert} from "chai";
 import {Response} from "request";
 import {config} from "../TestConfig";
+import container from "../../inversify/config";
+import {IKey} from "../../types/IKey";
+import {KEY} from "../../inversify/identifiers/common";
 
 before("Login admin", async () => {
     const data = {
-        username: config.admin.nickname,
-        password: config.admin.password
+        username: container.get<IKey>(KEY).ADMIN_NICKNAME,
+        password: container.get<IKey>(KEY).ADMIN_PASSWORD
     };
     const res: Response = await admin.post("/api/sessions", { body: data });
     assert.deepEqual(res.statusCode, 200);

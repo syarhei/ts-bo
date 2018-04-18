@@ -21,7 +21,6 @@ describe("Generation probabilities by Maher-Poisson Model", () => {
     it("Check probabilities", () => {
         const { win1, draw, win2 } = maherPoissonService
             .generateProbability(homeAttack, awayDefence, awayAttack, homeDefence);
-        console.log(win1 + draw + win2 === 1);
         Assert.deepEqual(win1 + draw + win2, 1);
     });
 });

@@ -26,7 +26,7 @@ export class UserController {
         router.post("/users", wrap(this.createUser));
         router.get("/users/:userId", this.authHandler.checkUserPermissions, this.getUser);
         router.put("/users/:userId", this.authHandler.checkUserPermissions, wrap(this.updateUser));
-        router.delete("/users/:userId", this.authHandler.adminAuth, wrap(this.updateUser));
+        router.delete("/users/:userId", this.authHandler.adminAuth, wrap(this.deleteUser));
         return router;
     }
 

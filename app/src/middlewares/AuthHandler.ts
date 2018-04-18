@@ -4,7 +4,7 @@ import {AuthError} from "../models/exceptions/AuthError";
 import * as autoBind from "auto-bind";
 import {UserForPassport} from "../models/contracts/user/UserForPassport";
 
-const ADMIN_ROLE_NAME: string = "admin";
+export const ADMIN_ROLE_NAME: string = "admin";
 export const USER_ROLE_NAME: string = "user";
 
 @injectable()

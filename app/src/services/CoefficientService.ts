@@ -1,6 +1,6 @@
 import {inject, injectable} from "inversify";
 import {CONFIG} from "../../inversify/identifiers/common";
-import {IConfig} from "../../IConfig";
+import {IConfig} from "../../types/IConfig";
 import {MatchError} from "../models/exceptions/MatchError";
 
 @injectable()
