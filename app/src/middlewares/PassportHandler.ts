@@ -1,12 +1,12 @@
 import {inject, injectable} from "inversify";
 import {AUTH_SERVICE, CONFIG, PASSPORT, USER_DAL} from "../../inversify/identifiers/common";
 import {Authenticator} from "passport";
-import {User} from "../models/contracts/User";
+import {User} from "../contracts/User";
 import {UserDAL} from "../DAL/UserDAL";
-import {UserError} from "../models/exceptions/UserError";
+import {UserError} from "../exceptions/UserError";
 import {Strategy as LocalStrategy} from "passport-local";
 import {AuthService} from "../services/AuthService";
-import {UserForPassport} from "../models/contracts/user/UserForPassport";
+import {UserForPassport} from "../contracts/user/UserForPassport";
 import {IConfig} from "../../types/IConfig";
 
 @injectable()

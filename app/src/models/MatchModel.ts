@@ -2,7 +2,7 @@ import {STRING, REAL, INTEGER, Sequelize, default as sequelize} from "sequelize"
 import {injectable, inject} from "inversify";
 import {DATABASE_CONNECTION, MATCH_CATEGORY_MODEL, TEAM_MODEL} from "../../inversify/identifiers/common";
 import {DBConnection} from "../../DBConnection";
-import {Match} from "./contracts/Match";
+import {Match} from "../contracts/Match";
 import {TeamModel} from "./TeamModel";
 import {MatchCategoryModel} from "./MatchCategoryModel";
 

@@ -1,6 +1,6 @@
 import {inject, injectable} from "inversify";
 import * as sequelize from "sequelize";
-import {Bet} from "../models/contracts/Bet";
+import {Bet} from "../contracts/Bet";
 import {DATABASE_CONTEXT} from "../../inversify/identifiers/common";
 import {DBContext} from "../../DBContext";
 

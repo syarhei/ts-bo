@@ -4,9 +4,9 @@ import {AUTH_HANDLER, AUTH_SERVICE, USER_SERVICE} from "../../inversify/identifi
 import {AuthService} from "../services/AuthService";
 import * as autoBind from "auto-bind";
 import * as wrap from "express-async-wrap";
-import {User} from "../models/contracts/User";
+import {User} from "../contracts/User";
 import {UserService} from "../services/UserService";
-import {UserOptionsForCreate} from "../models/contracts/user/UserOptionsForCreate";
+import {UserOptionsForCreate} from "../contracts/user/UserOptionsForCreate";
 import {AuthHandler} from "../middlewares/AuthHandler";
 
 @injectable()

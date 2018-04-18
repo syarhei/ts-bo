@@ -1,11 +1,11 @@
 import {inject, injectable} from "inversify";
 import {Router, Response, Request} from "express";
 import * as autoBind from "auto-bind";
-import {TeamOptionsForCreate} from "../models/contracts/team/TeamOptionsForCreate";
+import {TeamOptionsForCreate} from "../contracts/team/TeamOptionsForCreate";
 import {TeamService} from "../services/TeamService";
-import {Team} from "../models/contracts/Team";
-import {TeamError} from "../models/exceptions/TeamError";
-import {TeamOptionsForUpdate} from "../models/contracts/team/TeamOptionsForUpdate";
+import {Team} from "../contracts/Team";
+import {TeamError} from "../exceptions/TeamError";
+import {TeamOptionsForUpdate} from "../contracts/team/TeamOptionsForUpdate";
 import {AUTH_HANDLER, TEAM_SERVICE} from "../../inversify/identifiers/common";
 import * as wrap from "express-async-wrap";
 import {AuthHandler} from "../middlewares/AuthHandler";

@@ -1,8 +1,8 @@
-import {TeamOptionsForCreate} from "../../../src/models/contracts/team/TeamOptionsForCreate";
+import {TeamOptionsForCreate} from "../../../src/contracts/team/TeamOptionsForCreate";
 import {Response} from "request";
-import {Team} from "../../../src/models/contracts/Team";
+import {Team} from "../../../src/contracts/Team";
 import {assert} from "chai";
-import {TeamOptionsForUpdate} from "../../../src/models/contracts/team/TeamOptionsForUpdate";
+import {TeamOptionsForUpdate} from "../../../src/contracts/team/TeamOptionsForUpdate";
 import {admin, user1} from "../../TestEnvironment";
 
 const TEAM_NAME_1 = `Team-Test-1`;

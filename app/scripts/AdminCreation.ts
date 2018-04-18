@@ -1,7 +1,7 @@
 import container from "../inversify/config";
 import {UserDAL} from "../src/DAL/UserDAL";
 import {KEY, USER_DAL} from "../inversify/identifiers/common";
-import {User} from "../src/models/contracts/User";
+import {User} from "../src/contracts/User";
 import {IKey} from "../types/IKey";
 import * as Bluebird from "bluebird";
 import {ADMIN_ROLE_NAME} from "../src/middlewares/AuthHandler";

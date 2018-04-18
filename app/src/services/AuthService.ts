@@ -1,12 +1,12 @@
 import {inject, injectable} from "inversify";
 import {USER_DAL} from "../../inversify/identifiers/common";
 import {UserDAL} from "../DAL/UserDAL";
-import {User} from "../models/contracts/User";
+import {User} from "../contracts/User";
 import * as Bluebird from "bluebird";
-import {UserError} from "../models/exceptions/UserError";
+import {UserError} from "../exceptions/UserError";
 import uuid = require("uuid");
 import {USER_ROLE_NAME} from "../middlewares/AuthHandler";
-import {UserOptionsForCreate} from "../models/contracts/user/UserOptionsForCreate";
+import {UserOptionsForCreate} from "../contracts/user/UserOptionsForCreate";
 
 @injectable()
 export class AuthService {

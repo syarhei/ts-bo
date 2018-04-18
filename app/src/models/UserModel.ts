@@ -2,7 +2,7 @@ import {STRING, INTEGER, Sequelize, default as sequelize} from "sequelize";
 import {injectable, inject} from "inversify";
 import {DATABASE_CONNECTION} from "../../inversify/identifiers/common";
 import {DBConnection} from "../../DBConnection";
-import {User} from "./contracts/User";
+import {User} from "../contracts/User";
 
 const USER_TABLE: string = "User";
 

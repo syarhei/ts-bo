@@ -1,8 +1,8 @@
 import {inject, injectable} from "inversify";
 import {USER_DAL} from "../../inversify/identifiers/common";
 import {UserDAL} from "../DAL/UserDAL";
-import {User} from "../models/contracts/User";
-import {UserError} from "../models/exceptions/UserError";
+import {User} from "../contracts/User";
+import {UserError} from "../exceptions/UserError";
 
 @injectable()
 export class UserService {

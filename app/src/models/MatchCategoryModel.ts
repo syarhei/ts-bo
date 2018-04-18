@@ -2,7 +2,7 @@ import {STRING, BOOLEAN, Sequelize, default as sequelize} from "sequelize";
 import {injectable, inject} from "inversify";
 import {DATABASE_CONNECTION} from "../../inversify/identifiers/common";
 import {DBConnection} from "../../DBConnection";
-import {MatchCategory} from "./contracts/MatchCategory";
+import {MatchCategory} from "../contracts/MatchCategory";
 
 const USER_TABLE: string = "MatchCategory";
 

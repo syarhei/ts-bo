@@ -1,8 +1,8 @@
 import {injectable} from "inversify";
 import {NextFunction, Request, Response} from "express";
-import {AuthError} from "../models/exceptions/AuthError";
+import {AuthError} from "../exceptions/AuthError";
 import * as autoBind from "auto-bind";
-import {UserForPassport} from "../models/contracts/user/UserForPassport";
+import {UserForPassport} from "../contracts/user/UserForPassport";
 
 export const ADMIN_ROLE_NAME: string = "admin";
 export const USER_ROLE_NAME: string = "user";
