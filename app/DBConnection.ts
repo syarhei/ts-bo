@@ -1,5 +1,6 @@
 import {CONFIG, KEY} from "./inversify/identifiers/common";
-import {IConfig, IKey} from "./IConfig";
+import {IConfig} from "./types/IConfig";
+import {IKey} from "./types/IKey";
 import {injectable, inject} from "inversify";
 import {default as Datastore, Sequelize} from "sequelize";
 
@@ -15,7 +16,7 @@ export class DBConnection {
             dialect: config.DATABASE_DIALECT,
             host: config.DATABASE_HOSTNAME,
             operatorsAliases: false,
-            logging: true
+            logging: false
         });
     }
 }

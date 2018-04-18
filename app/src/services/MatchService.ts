@@ -1,8 +1,8 @@
 import {inject, injectable} from "inversify";
 import {MatchDAL} from "../DAL/MatchDAL";
-import {Match} from "../models/contracts/Match";
+import {Match} from "../contracts/Match";
 import uuid = require("uuid");
-import {MatchError} from "../models/exceptions/MatchError";
+import {MatchError} from "../exceptions/MatchError";
 import {MATCH_DAL} from "../../inversify/identifiers/common";
 
 @injectable()

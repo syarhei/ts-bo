@@ -1,7 +1,7 @@
 import {user1} from "../TestEnvironment";
-import {UserOptionsForCreate} from "../../src/models/contracts/user/UserOptionsForCreate";
+import {UserOptionsForCreate} from "../../src/contracts/user/UserOptionsForCreate";
 import {assert} from "chai";
-import {User} from "../../src/models/contracts/User";
+import {User} from "../../src/contracts/User";
 import {Response} from "request";
 import {config} from "../TestConfig";
 

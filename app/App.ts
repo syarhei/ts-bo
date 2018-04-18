@@ -10,8 +10,7 @@ import {ErrorHandler} from "./src/middlewares/ErrorHandler";
 import {Authenticator} from "passport";
 import {PassportHandler} from "./src/middlewares/PassportHandler";
 import * as session from "express-session";
-import {EXPRESS_SESSION_COOKIE_NAME} from "./types/common";
-import {IKey} from "./IConfig";
+import {IKey} from "./types/IKey";
 import {SessionOptions} from "express-session";
 
 @injectable()
@@ -33,7 +32,7 @@ export class App {
 
     private get sessionOptions(): SessionOptions {
         return {
-            name: EXPRESS_SESSION_COOKIE_NAME, secret: this.keys.JSON_WEB_TOKEN_KEY,
+            name: this.keys.EXPRESS_SESSION_COOKIE_NAME, secret: this.keys.JSON_WEB_TOKEN_KEY,
             resave: false, saveUninitialized: false
         };
     }

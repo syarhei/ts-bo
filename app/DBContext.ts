@@ -5,14 +5,14 @@ import {
 } from "./inversify/identifiers/common";
 import {UserModel} from "./src/models/UserModel";
 import {DBConnection} from "./DBConnection";
-import {User} from "./src/models/contracts/User";
-import {Team} from "./src/models/contracts/Team";
+import {User} from "./src/contracts/User";
+import {Team} from "./src/contracts/Team";
 import {TeamModel} from "./src/models/TeamModel";
 import {MatchCategoryModel} from "./src/models/MatchCategoryModel";
-import {MatchCategory} from "./src/models/contracts/MatchCategory";
+import {MatchCategory} from "./src/contracts/MatchCategory";
 import {MatchModel} from "./src/models/MatchModel";
-import {Match} from "./src/models/contracts/Match";
-import {Bet} from "./src/models/contracts/Bet";
+import {Match} from "./src/contracts/Match";
+import {Bet} from "./src/contracts/Bet";
 import {BetModel} from "./src/models/BetModel";
 
 @injectable()

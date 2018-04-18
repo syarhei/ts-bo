@@ -1,11 +1,11 @@
 import {inject, injectable} from "inversify";
 import {TEAM_DAL} from "../../inversify/identifiers/common";
 import {TeamDAL} from "../DAL/TeamDAL";
-import {Team} from "../models/contracts/Team";
-import {TeamOptionsForCreate} from "../models/contracts/team/TeamOptionsForCreate";
+import {Team} from "../contracts/Team";
+import {TeamOptionsForCreate} from "../contracts/team/TeamOptionsForCreate";
 import uuid = require("uuid");
-import {TeamError} from "../models/exceptions/TeamError";
-import {TeamOptionsForUpdate} from "../models/contracts/team/TeamOptionsForUpdate";
+import {TeamError} from "../exceptions/TeamError";
+import {TeamOptionsForUpdate} from "../contracts/team/TeamOptionsForUpdate";
 
 @injectable()
 export class TeamService {

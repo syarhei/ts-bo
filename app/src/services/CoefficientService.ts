@@ -1,7 +1,7 @@
 import {inject, injectable} from "inversify";
 import {CONFIG} from "../../inversify/identifiers/common";
-import {IConfig} from "../../IConfig";
-import {MatchError} from "../models/exceptions/MatchError";
+import {IConfig} from '../../types/IConfig';
+import {MatchError} from "../exceptions/MatchError";
 
 @injectable()
 export class CoefficientService {

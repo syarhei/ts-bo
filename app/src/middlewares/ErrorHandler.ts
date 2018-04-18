@@ -1,8 +1,8 @@
 import {ErrorRequestHandler, NextFunction, Request, Response} from "express";
-import {UserError} from "../models/exceptions/UserError";
-import {TeamError} from "../models/exceptions/TeamError";
-import {AuthError} from "../models/exceptions/AuthError";
-import {MatchError} from "../models/exceptions/MatchError";
+import {UserError} from "../exceptions/UserError";
+import {TeamError} from "../exceptions/TeamError";
+import {AuthError} from "../exceptions/AuthError";
+import {MatchError} from "../exceptions/MatchError";
 
 export class ErrorHandler {
     constructor() {}

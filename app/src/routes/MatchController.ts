@@ -1,7 +1,7 @@
 import {inject, injectable} from "inversify";
 import {MatchService} from "../services/MatchService";
 import {Router, Request, Response} from "express";
-import {Match} from "../models/contracts/Match";
+import {Match} from "../contracts/Match";
 import {CoefficientService} from "../services/CoefficientService";
 import {MaherPoissonService} from "../services/MaherPoissonService";
 import {COEFFICIENT_SERVICE, MAHER_POISSON_SERVICE, MATCH_SERVICE} from "../../inversify/identifiers/common";

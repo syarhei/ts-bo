@@ -6,7 +6,8 @@ import {
     MATCH_CONTROLLER, MATCH_DAL, MATCH_MODEL, MATCH_SERVICE, PASSPORT, SESSION_CONTROLLER, TEAM_CONTROLLER, TEAM_DAL,
     TEAM_MODEL, TEAM_SERVICE, USER_CONTROLLER, USER_DAL, AUTH_HANDLER, USER_MODEL, USER_SERVICE
 } from "./identifiers/common";
-import {IConfig, IKey} from "../IConfig";
+import {IConfig} from "../types/IConfig";
+import {IKey} from "../types/IKey";
 import {DBContext} from "../DBContext";
 import {UserModel} from "../src/models/UserModel";
 import {DBConnection} from "../DBConnection";

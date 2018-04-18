@@ -1,5 +1,5 @@
 import {inject, injectable} from "inversify";
-import {IConfig} from "../../IConfig";
+import {IConfig} from "../../types/IConfig";
 import {CONFIG} from "../../inversify/identifiers/common";
 import {convertSumToInteger} from "../../utils/math";
 

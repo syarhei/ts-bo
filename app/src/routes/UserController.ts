@@ -4,9 +4,9 @@ import {AUTH_HANDLER, AUTH_SERVICE, USER_SERVICE} from "../../inversify/identifi
 import {AuthService} from "../services/AuthService";
 import * as autoBind from "auto-bind";
 import * as wrap from "express-async-wrap";
-import {User} from "../models/contracts/User";
+import {User} from "../contracts/User";
 import {UserService} from "../services/UserService";
-import {UserOptionsForCreate} from "../models/contracts/user/UserOptionsForCreate";
+import {UserOptionsForCreate} from "../contracts/user/UserOptionsForCreate";
 import {AuthHandler} from "../middlewares/AuthHandler";
 
 @injectable()
@@ -26,7 +26,7 @@ export class UserController {
         router.post("/users", wrap(this.createUser));
         router.get("/users/:userId", this.authHandler.checkUserPermissions, this.getUser);
         router.put("/users/:userId", this.authHandler.checkUserPermissions, wrap(this.updateUser));
-        router.delete("/users/:userId", this.authHandler.adminAuth, wrap(this.updateUser));
+        router.delete("/users/:userId", this.authHandler.adminAuth, wrap(this.deleteUser));
         return router;
     }
 

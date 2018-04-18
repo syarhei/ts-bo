@@ -6,7 +6,8 @@
   "scripts": {
     "preinstall": "npm i -g gulp typescript",
     "prestart": "gulp build",
-    "start": "cd dist && node index.js"
+    "start": "cd dist && node index.js",
+    "test": "node_modules/.bin/mocha dist/test/test.js --timeout 10000 --slow 400 --bail"
   },
   "repository": {
     "type": "git",

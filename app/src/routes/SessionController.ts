@@ -1,18 +1,23 @@
 import {NextFunction, Request, Response, Router} from "express";
 import {inject, injectable} from "inversify";
 import * as autoBind from "auto-bind";
-import {AUTH_HANDLER, PASSPORT} from "../../inversify/identifiers/common";
+import {AUTH_HANDLER, CONFIG, KEY, PASSPORT} from "../../inversify/identifiers/common";
 import * as wrap from "express-async-wrap";
 import {Authenticator} from "passport";
-import {EXPRESS_SESSION_COOKIE_NAME, PASSPORT_STRATEGY_NAME} from "../../types/common";
 import {AuthHandler} from "../middlewares/AuthHandler";
+import {IConfig} from "../../types/IConfig";
+import {IKey} from "../../types/IKey";
 
 @injectable()
 export class SessionController {
+    private cookie: string = null;
     constructor(
         @inject(PASSPORT) private passport: Authenticator,
-        @inject(AUTH_HANDLER) private auth: AuthHandler
+        @inject(AUTH_HANDLER) private auth: AuthHandler,
+        @inject(CONFIG) private config: IConfig,
+        @inject(KEY) keys: IKey
     ) {
+        this.cookie = keys.EXPRESS_SESSION_COOKIE_NAME;
         autoBind(this);
     }
 
@@ -20,7 +25,9 @@ export class SessionController {
 
     public get router(): Router {
         const router = Router();
-        router.post("/sessions", this.passport.authenticate(PASSPORT_STRATEGY_NAME), wrap(this.createSession));
+        router.post(
+            "/sessions", this.passport.authenticate(this.config.PASSPORT_STRATEGY_NAME), wrap(this.createSession)
+        );
         router.delete("/sessions", this.auth.userAuth, wrap(this.deleteSession));
 
         return router;
@@ -36,7 +43,7 @@ export class SessionController {
             if (err) {
                 next(err);
             } else {
-                res.clearCookie(EXPRESS_SESSION_COOKIE_NAME);
+                res.clearCookie(this.cookie);
                 res.status(200).end();
             }
         });

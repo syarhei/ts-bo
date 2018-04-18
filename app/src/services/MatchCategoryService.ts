@@ -1,9 +1,9 @@
 import {inject, injectable} from "inversify";
 import {MATCH_CATEGORY_DAL} from "../../inversify/identifiers/common";
 import {MatchCategoryDAL} from "../DAL/MatchCategoryDAL";
-import {MatchCategory} from "../models/contracts/MatchCategory";
+import {MatchCategory} from "../contracts/MatchCategory";
 import uuid = require("uuid");
-import {MatchCategoryError} from "../models/exceptions/MatchCategoryError";
+import {MatchCategoryError} from "../exceptions/MatchCategoryError";
 
 @injectable()
 export class MatchCategoryService {

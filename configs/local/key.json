@@ -1,4 +1,8 @@
 {
   "DATABASE_PASSWORD": "root",
-  "JSON_WEB_TOKEN_KEY": "gTfgGWge5g32ghF"
+  "JSON_WEB_TOKEN_KEY": "gTfgGWge5g32ghF",
+  "EXPRESS_SESSION_COOKIE_NAME": "bookmaker-office-key",
+  "ADMIN_NICKNAME": "admin",
+  "ADMIN_PASSWORD": "Admin123",
+  "ADMIN_EMAIL": "support@bookmaker-office.com"
 }

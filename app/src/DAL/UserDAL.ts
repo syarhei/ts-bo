@@ -2,7 +2,7 @@ import {injectable, inject} from "inversify";
 import {DBContext} from "../../DBContext";
 import * as sequelize from "sequelize";
 import {DATABASE_CONTEXT} from "../../inversify/identifiers/common";
-import {User} from "../models/contracts/User";
+import {User} from "../contracts/User";
 
 type AllowedPropsForUpdate = {
     firstName?: string; lastName?: string; dayOfBirthDay?: number; country?: string; address?: string;
