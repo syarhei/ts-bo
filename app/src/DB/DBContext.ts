@@ -2,18 +2,18 @@ import {default as sequelize} from "sequelize";
 import {inject, injectable} from "inversify";
 import {
     BET_MODEL, DATABASE_CONNECTION, MATCH_CATEGORY_MODEL, MATCH_MODEL, TEAM_MODEL, USER_MODEL
-} from "./inversify/identifiers/common";
-import {UserModel} from "./src/models/UserModel";
+} from "../../inversify/identifiers/common";
+import {UserModel} from "../models/UserModel";
 import {DBConnection} from "./DBConnection";
-import {User} from "./src/contracts/User";
-import {Team} from "./src/contracts/Team";
-import {TeamModel} from "./src/models/TeamModel";
-import {MatchCategoryModel} from "./src/models/MatchCategoryModel";
-import {MatchCategory} from "./src/contracts/MatchCategory";
-import {MatchModel} from "./src/models/MatchModel";
-import {Match} from "./src/contracts/Match";
-import {Bet} from "./src/contracts/Bet";
-import {BetModel} from "./src/models/BetModel";
+import {User} from "../contracts/User";
+import {Team} from "../contracts/Team";
+import {TeamModel} from "../models/TeamModel";
+import {MatchCategoryModel} from "../models/MatchCategoryModel";
+import {MatchCategory} from "../contracts/MatchCategory";
+import {MatchModel} from "../models/MatchModel";
+import {Match} from "../contracts/Match";
+import {Bet} from "../contracts/Bet";
+import {BetModel} from "../models/BetModel";
 
 @injectable()
 export class DBContext {

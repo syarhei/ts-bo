@@ -1,6 +1,6 @@
-import {CONFIG, KEY} from "./inversify/identifiers/common";
-import {IConfig} from "./types/IConfig";
-import {IKey} from "./types/IKey";
+import {CONFIG, KEY} from "../../inversify/identifiers/common";
+import {IConfig} from "../../types/IConfig";
+import {IKey} from "../../types/IKey";
 import {injectable, inject} from "inversify";
 import {default as Datastore, Sequelize} from "sequelize";
 
