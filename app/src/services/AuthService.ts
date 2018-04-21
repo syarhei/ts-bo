@@ -7,6 +7,7 @@ import {UserError} from "../exceptions/UserError";
 import uuid = require("uuid");
 import {USER_ROLE_NAME} from "../middlewares/AuthHandler";
 import {UserOptionsForCreate} from "../contracts/user/UserOptionsForCreate";
+import {compare, hash} from "bcrypt";
 
 @injectable()
 export class AuthService {
@@ -28,6 +29,7 @@ export class AuthService {
             throw new UserError(`This email already is used in the system`);
         }
 
+        const password: string = await hash(userOptions.password, 10);
         const userData: User = {
             id: uuid(),
             nickname: userOptions.nickname,
@@ -42,7 +44,7 @@ export class AuthService {
             balance: 1000,
             email: userOptions.email,
             role: USER_ROLE_NAME,
-            password: userOptions.password
+            password: password
         };
 
         return this.userDAL.createUser(userData);
@@ -53,7 +55,8 @@ export class AuthService {
         if (!user) {
             throw new UserError(`User is not found by nickname`, 1);
         }
-        if (user.password !== password) {
+        const isCompared: boolean = await compare(password, user.password);
+        if (!isCompared) {
             throw new UserError(`User's password is not correct`, 1);
         }
         return user;

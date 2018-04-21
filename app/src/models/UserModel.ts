@@ -59,7 +59,7 @@ export class UserModel {
                 allowNull: false
             },
             "password": {
-                type: STRING(64),
+                type: STRING(60),
                 allowNull: false
             },
             "balance": {
