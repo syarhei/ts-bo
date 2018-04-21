@@ -6,6 +6,7 @@ import {IKey} from "../types/IKey";
 import * as Bluebird from "bluebird";
 import {ADMIN_ROLE_NAME} from "../src/middlewares/AuthHandler";
 import uuid = require("uuid");
+import {hash} from "bcrypt";
 
 export async function createAdmin() {
     try {
@@ -21,6 +22,7 @@ export async function createAdmin() {
         if (usersWithNickname.length || usersWithEmail.length) {
             console.log(`Admin already was created`);
         } else {
+            const password: string = await hash(keys.ADMIN_PASSWORD, 10);
             const user: User = {
                 id: uuid(),
                 nickname: keys.ADMIN_NICKNAME,
@@ -31,7 +33,7 @@ export async function createAdmin() {
                 balance: 1000000,
                 email: keys.ADMIN_EMAIL,
                 role: ADMIN_ROLE_NAME,
-                password: keys.ADMIN_PASSWORD
+                password: password
             } as User;
             await userDAL.createUser(user);
             console.log(`Admin is created`);
