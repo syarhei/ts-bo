@@ -2,16 +2,17 @@ import * as e from "express";
 import {Application} from "express";
 import * as Bluebird from "bluebird";
 import {injectable, inject} from "inversify";
-import {PASSPORT_HANDLER, DATABASE_CONTEXT, KEY, MAIN_CONTROLLER, PASSPORT} from "./inversify/identifiers/common";
-import {DBContext} from "./DBContext";
+import {
+    PASSPORT_HANDLER, DATABASE_CONTEXT, KEY, MAIN_CONTROLLER, PASSPORT, DATABASE_SESSION
+} from "./inversify/identifiers/common";
+import {DBContext} from "./src/DB/DBContext";
 import {MainController} from "./src/routes/MainController";
 import * as bodyParser from "body-parser";
 import {ErrorHandler} from "./src/middlewares/ErrorHandler";
 import {Authenticator} from "passport";
 import {PassportHandler} from "./src/middlewares/PassportHandler";
-import * as session from "express-session";
 import {IKey} from "./types/IKey";
-import {SessionOptions} from "express-session";
+import {DBSession} from "./src/DB/DBSession";
 
 @injectable()
 export class App {
@@ -20,6 +21,7 @@ export class App {
 
     constructor(
         @inject(DATABASE_CONTEXT) private dbContext: DBContext,
+        @inject(DATABASE_SESSION) private dbSession: DBSession,
         @inject(MAIN_CONTROLLER) private mainController: MainController,
         @inject(PASSPORT) private passport: Authenticator,
         @inject(PASSPORT_HANDLER) private passportHandler: PassportHandler,
@@ -30,15 +32,8 @@ export class App {
         this.app = e();
     }
 
-    private get sessionOptions(): SessionOptions {
-        return {
-            name: this.keys.EXPRESS_SESSION_COOKIE_NAME, secret: this.keys.JSON_WEB_TOKEN_KEY,
-            resave: false, saveUninitialized: false
-        };
-    }
-
     init(): void {
-        this.app.use(session(this.sessionOptions));
+        this.app.use(this.dbSession.middleware);
         this.app.use(bodyParser.json({}));
         this.app.use(bodyParser.urlencoded({ extended: true }));
         this.app.use(this.passport.initialize());

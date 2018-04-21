@@ -1,7 +1,7 @@
 import {inject, injectable} from "inversify";
 import {DATABASE_CONTEXT} from "../../inversify/identifiers/common";
 import {MatchCategory} from "../contracts/MatchCategory";
-import {DBContext} from "../../DBContext";
+import {DBContext} from "../DB/DBContext";
 import * as sequelize from "sequelize";
 
 @injectable()

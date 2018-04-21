@@ -1,7 +1,7 @@
 import {inject, injectable} from "inversify";
 import {Team} from "../contracts/Team";
 import {DATABASE_CONTEXT} from "../../inversify/identifiers/common";
-import {DBContext} from "../../DBContext";
+import {DBContext} from "../DB/DBContext";
 import * as sequelize from "sequelize";
 
 type AllowedPropsForUpdate = { name?: string; owner?: string; country?: string; year?: number };

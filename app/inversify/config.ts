@@ -5,13 +5,13 @@ import {
     DATABASE_CONTEXT, KEY, MAHER_POISSON_SERVICE, MAIN_CONTROLLER, MATCH_CATEGORY_DAL, MATCH_CATEGORY_MODEL,
     MATCH_CONTROLLER, MATCH_DAL, MATCH_MODEL, MATCH_SERVICE, PASSPORT, SESSION_CONTROLLER, TEAM_CONTROLLER, TEAM_DAL,
     TEAM_MODEL, TEAM_SERVICE, USER_CONTROLLER, USER_DAL, AUTH_HANDLER, USER_MODEL, USER_SERVICE, MATCH_CATEGORY_SERVICE,
-    MATCH_CATEGORY_CONTROLLER
+    MATCH_CATEGORY_CONTROLLER, DATABASE_SESSION
 } from "./identifiers/common";
 import {IConfig} from "../types/IConfig";
 import {IKey} from "../types/IKey";
-import {DBContext} from "../DBContext";
+import {DBContext} from "../src/DB/DBContext";
 import {UserModel} from "../src/models/UserModel";
-import {DBConnection} from "../DBConnection";
+import {DBConnection} from "../src/DB/DBConnection";
 import {App} from "../App";
 import {UserController} from "../src/routes/UserController";
 import {MainController} from "../src/routes/MainController";
@@ -38,6 +38,7 @@ import {AuthHandler} from "../src/middlewares/AuthHandler";
 import {UserService} from "../src/services/UserService";
 import {MatchCategoryService} from "../src/services/MatchCategoryService";
 import {MatchCategoryController} from "../src/routes/MatchCategoryController";
+import {DBSession} from "../src/DB/DBSession";
 
 const environment: string = getConfigEnvironment();
 const config: IConfig = require(`../../configs/${environment}/config.json`);
@@ -76,6 +77,7 @@ container.bind<UserController>(USER_CONTROLLER).to(UserController);
 container.bind<SessionController>(SESSION_CONTROLLER).to(SessionController);
 container.bind<MainController>(MAIN_CONTROLLER).to(MainController);
 
+container.bind<DBSession>(DATABASE_SESSION).to(DBSession).inSingletonScope();
 container.bind<PassportHandler>(PASSPORT_HANDLER).to(PassportHandler);
 container.bind<AuthHandler>(AUTH_HANDLER).to(AuthHandler);
 container.bind<App>(APPLICATION).to(App).inSingletonScope();

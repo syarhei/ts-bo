@@ -1,7 +1,7 @@
 import {STRING, INTEGER, BOOLEAN, Sequelize, default as sequelize} from "sequelize";
 import {injectable, inject} from "inversify";
 import {DATABASE_CONNECTION, MATCH_MODEL, USER_MODEL} from "../../inversify/identifiers/common";
-import {DBConnection} from "../../DBConnection";
+import {DBConnection} from "../DB/DBConnection";
 import {Bet} from "../contracts/Bet";
 import {MatchModel} from "./MatchModel";
 import {UserModel} from "./UserModel";
