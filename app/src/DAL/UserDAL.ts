@@ -1,5 +1,5 @@
 import {injectable, inject} from "inversify";
-import {DBContext} from "../../DBContext";
+import {DBContext} from "../DB/DBContext";
 import * as sequelize from "sequelize";
 import {DATABASE_CONTEXT} from "../../inversify/identifiers/common";
 import {User} from "../contracts/User";

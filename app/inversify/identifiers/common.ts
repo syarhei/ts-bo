@@ -30,6 +30,7 @@ export const USER_CONTROLLER: symbol = Symbol("USER_CONTROLLER");
 export const SESSION_CONTROLLER: symbol = Symbol("SESSION_CONTROLLER");
 export const MAIN_CONTROLLER: symbol = Symbol("MAIN_CONTROLLER");
 
+export const DATABASE_SESSION: symbol = Symbol("DATABASE_SESSION");
 export const PASSPORT_HANDLER: symbol = Symbol("PASSPORT_HANDLER");
 export const AUTH_HANDLER: symbol = Symbol("AUTH_HANDLER");
 export const APPLICATION: symbol = Symbol("APPLICATION");
