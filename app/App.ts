@@ -13,6 +13,7 @@ import {Authenticator} from "passport";
 import {PassportHandler} from "./src/middlewares/PassportHandler";
 import {IKey} from "./types/IKey";
 import {DBSession} from "./src/DB/DBSession";
+import {logRequestResponse} from "./utils/logger";
 
 @injectable()
 export class App {
@@ -33,6 +34,7 @@ export class App {
     }
 
     init(): void {
+        this.app.use(logRequestResponse);
         this.app.use(this.dbSession.middleware);
         this.app.use(bodyParser.json({}));
         this.app.use(bodyParser.urlencoded({ extended: true }));
