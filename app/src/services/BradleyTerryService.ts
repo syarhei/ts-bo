@@ -1,30 +1,21 @@
 import {injectable} from "inversify";
-
-enum MatchResult {
-    WIN = 1, DRAW = 0.5, LOSE = 0
-}
+import {convertSumToInteger} from "../../utils/math";
 
 @injectable()
 export class BradleyTerryService {
-    private readonly B: number = Math.log(2) / 100;
     constructor() {}
 
-    public getRating(oldRating: number, K: number, result: MatchResult, difference: number): number {
-        const power: number = ( difference / 400 ) + 1;
-        const expectedResult: number = 1 / ( Math.pow(10, power));
-        return oldRating + K * ( result - expectedResult );
-    }
+    public generateProbabilities(
+        point1: number, point2: number, drawProb1: number = 1, drawProb2: number = 1, homeAdvantage: number = 0.5
+    ) {
+        homeAdvantage = homeAdvantage * 2;
+        let win1: number = homeAdvantage * point1 / (homeAdvantage * point1 + point2);
+        const numeratorOfDraw: number = 2 * Math.sqrt(drawProb1 * drawProb2 * homeAdvantage * point1 * point2);
+        let draw: number = numeratorOfDraw / (homeAdvantage * point1 + point2 + numeratorOfDraw);
+        let win2: number = point2 / (homeAdvantage * point1 + point2);
 
-    public getStartingRating(oldRating: number, wins: number, loses: number, games: number): number {
-        return oldRating + ( 400 * (wins - loses) / games );
-    }
+        ([win1, draw, win2] = convertSumToInteger(1, win1, draw, win2));
 
-    public generateProbability() {
-
-    }
-
-    private getProbability(homeAdvantage: number, ratingHome: number, ratingAway: number): number {
-        const exp: number = Math.exp(homeAdvantage + this.B * (ratingHome - ratingAway));
-        return exp / (1 + exp);
+        return { win1, draw, win2 };
     }
 }

@@ -21,6 +21,7 @@ export const TEAM_SERVICE: symbol = Symbol("TEAM_SERVICE");
 export const MATCH_CATEGORY_SERVICE: symbol = Symbol("MATCH_CATEGORY_SERVICE");
 export const MATCH_SERVICE: symbol = Symbol("MATCH_SERVICE");
 export const MAHER_POISSON_SERVICE: symbol = Symbol("MAHER_POISSON_SERVICE");
+export const BRADLEY_TERRY_SERVICE: symbol = Symbol("BRADLEY_TERRY_SERVICE");
 export const COEFFICIENT_SERVICE: symbol = Symbol("COEFFICIENT_SERVICE");
 
 export const TEAM_CONTROLLER: symbol = Symbol("TEAM_CONTROLLER");

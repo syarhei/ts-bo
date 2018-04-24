@@ -48,12 +48,40 @@ export class MatchService {
         }
     }
 
-    public async getMatchesByTeam(teamId: string, limit: number): Promise<{ attack: number, defence: number }> {
+    public async getTeamAbilities(teamId: string, limit: number): Promise<{ attack: number, defence: number }> {
         const matches: Match[] = await this.matchDAL.searchLastMatches(teamId, limit);
-        const homeGoals: number[] = matches.map(match => match.homeGoals);
-        const guestGoals: number[] = matches.map(match => match.guestGoals);
-        const attack: number = homeGoals.reduce((memory: number, value: number) => memory + value, 0) / limit;
-        const defence: number = limit / guestGoals.reduce((memory: number, value: number) => memory + value, 0);
+        const GF: number[] =
+            matches.map(match => match.teamHomeId === teamId ? match.homeGoals : match.guestGoals);
+        const GA: number[] =
+            matches.map(match => match.teamHomeId === teamId ? match.guestGoals : match.homeGoals);
+        const attack: number = GF.reduce((memory: number, value: number) => memory + value, 0) / matches.length;
+        const defence: number = GA.reduce((memory: number, value: number) => memory + value, 0) / matches.length;
         return { attack, defence };
+    }
+
+    public async getMatchesByTeamId(teamId: string, limit: number): Promise<Match[]> {
+        return this.matchDAL.searchLastMatches(teamId, limit);
+    }
+
+    public getTeamPoints(teamId: string, matches: Match[]): number {
+        const points: number[] = matches.map(match => {
+            if (match.teamHomeId === teamId) {
+                return match.homeGoals > match.guestGoals ? 3 : match.homeGoals === match.guestGoals ? 1 : 0;
+            } else {
+                return match.homeGoals < match.guestGoals ? 3 : match.homeGoals === match.guestGoals ? 1 : 0;
+            }
+        });
+        return points.reduce((memory, value) => memory + value, 0);
+    }
+
+    public getDrawProbability(matches: Match[]): number {
+        const matchesWithDrawResult: Match[] = matches.filter(match => match.homeGoals === match.guestGoals);
+        return matchesWithDrawResult.length / matches.length;
+    }
+
+    public getHomeAbility(teamId: string, matches: Match[]): number {
+        const matchesAtHome: Match[] = matches.filter(match => match.teamHomeId === teamId);
+        const winMatchesAtHome: Match[] = matches.filter(match => match.homeGoals > match.guestGoals);
+        return winMatchesAtHome.length / matchesAtHome.length;
     }
 }
