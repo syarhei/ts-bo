@@ -22,15 +22,15 @@ export class TeamModel {
                 primaryKey: true
             },
             "name": {
-                type: sequelize.STRING(20),
+                type: sequelize.STRING(30),
                 allowNull: false
             },
             "owner": {
-                type: sequelize.STRING(20),
+                type: sequelize.STRING(30),
                 allowNull: false,
             },
             "country": {
-                type: sequelize.STRING(20),
+                type: sequelize.STRING(30),
                 allowNull: false,
             },
             "year": {

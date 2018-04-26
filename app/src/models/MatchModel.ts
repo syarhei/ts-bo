@@ -1,4 +1,4 @@
-import {STRING, REAL, INTEGER, Sequelize, default as sequelize} from "sequelize";
+import {STRING, REAL, INTEGER, Sequelize, default as sequelize, BIGINT} from "sequelize";
 import {injectable, inject} from "inversify";
 import {DATABASE_CONNECTION, MATCH_CATEGORY_MODEL, TEAM_MODEL} from "../../inversify/identifiers/common";
 import {DBConnection} from "../DB/DBConnection";
@@ -25,45 +25,48 @@ export class MatchModel {
                 type: STRING(36),
                 primaryKey: true
             },
-            "teamHome": {
-                type: STRING(30),
+            "teamHomeId": {
+                type: STRING(36),
                 references: {
                     model: this.teamModel.model,
                     key: "id"
                 }
             },
-            "teamGuest": {
-                type: STRING(30),
+            "teamGuestId": {
+                type: STRING(36),
                 references: {
                     model: this.teamModel.model,
                     key: "id"
                 }
             },
             "matchCategoryId": {
-                type: STRING(30),
+                type: STRING(36),
                 references: {
                     model: this.matchCategory.model,
                     key: "id"
                 }
             },
             "coefficientWin1": {
-                type: REAL,
-                allowNull: false
+                type: REAL
             },
             "coefficientDraw": {
-                type: REAL,
-                allowNull: false
+                type: REAL
             },
             "coefficientWin2": {
-                type: REAL,
-                allowNull: false
+                type: REAL
             },
             "place": {
                 type: STRING(30)
             },
             "date": {
-                type: INTEGER,
+                type: BIGINT,
                 allowNull: false
+            },
+            "homeGoals": {
+                type: INTEGER
+            },
+            "guestGoals": {
+                type: INTEGER
             },
             "result": {
                 type: STRING(2)

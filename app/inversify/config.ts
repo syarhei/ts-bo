@@ -5,7 +5,7 @@ import {
     DATABASE_CONTEXT, KEY, MAHER_POISSON_SERVICE, MAIN_CONTROLLER, MATCH_CATEGORY_DAL, MATCH_CATEGORY_MODEL,
     MATCH_CONTROLLER, MATCH_DAL, MATCH_MODEL, MATCH_SERVICE, PASSPORT, SESSION_CONTROLLER, TEAM_CONTROLLER, TEAM_DAL,
     TEAM_MODEL, TEAM_SERVICE, USER_CONTROLLER, USER_DAL, AUTH_HANDLER, USER_MODEL, USER_SERVICE, MATCH_CATEGORY_SERVICE,
-    MATCH_CATEGORY_CONTROLLER, DATABASE_SESSION
+    MATCH_CATEGORY_CONTROLLER, DATABASE_SESSION, BRADLEY_TERRY_SERVICE
 } from "./identifiers/common";
 import {IConfig} from "../types/IConfig";
 import {IKey} from "../types/IKey";
@@ -39,6 +39,7 @@ import {UserService} from "../src/services/UserService";
 import {MatchCategoryService} from "../src/services/MatchCategoryService";
 import {MatchCategoryController} from "../src/routes/MatchCategoryController";
 import {DBSession} from "../src/DB/DBSession";
+import {BradleyTerryService} from "../src/services/BradleyTerryService";
 
 const environment: string = getConfigEnvironment();
 const config: IConfig = require(`../../configs/${environment}/config.json`);
@@ -68,6 +69,7 @@ container.bind<TeamService>(TEAM_SERVICE).to(TeamService);
 container.bind<MatchCategoryService>(MATCH_CATEGORY_SERVICE).to(MatchCategoryService);
 container.bind<MatchService>(MATCH_SERVICE).to(MatchService);
 container.bind<MaherPoissonService>(MAHER_POISSON_SERVICE).to(MaherPoissonService);
+container.bind<BradleyTerryService>(BRADLEY_TERRY_SERVICE).to(BradleyTerryService);
 container.bind<CoefficientService>(COEFFICIENT_SERVICE).to(CoefficientService);
 
 container.bind<TeamController>(TEAM_CONTROLLER).to(TeamController);
