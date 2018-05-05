@@ -24,6 +24,4 @@ after("Delete user", async () => {
 
     const resForLogoutForAdmin: Response = await admin.delete("/api/sessions");
     assert.deepEqual(resForLogoutForAdmin.statusCode, 200);
-
-    process.exit();
 });

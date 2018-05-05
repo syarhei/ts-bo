@@ -2,7 +2,11 @@ import "colors";
 import {NextFunction, Request, Response} from "express";
 import {RequestHandler} from "express-serve-static-core";
 
+// TODO: make log function as LogHandler class (with middleware getter)
+
 export function logRequestResponse(req: Request, res: Response, next: NextFunction): RequestHandler {
+    res.setHeader('Access-Control-Allow-Origin', '*');
+
     console.log(`[${req.method.blue.bold}]: ${req.path}`);
     const str: string = "";
     res.json = new Proxy(res.json, {
