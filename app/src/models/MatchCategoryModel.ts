@@ -22,7 +22,7 @@ export class MatchCategoryModel {
                 primaryKey: true
             },
             "name": {
-                type: STRING(20),
+                type: STRING(30),
                 unique: true,
                 allowNull: false
             },

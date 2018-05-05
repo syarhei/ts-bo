@@ -16,7 +16,10 @@ export class DBConnection {
             dialect: config.DATABASE_DIALECT,
             host: config.DATABASE_HOSTNAME,
             operatorsAliases: false,
-            logging: false
+            logging: false,
+            define: {
+                charset: "utf8"
+            }
         });
     }
 }
