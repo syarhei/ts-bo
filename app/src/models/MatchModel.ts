@@ -25,14 +25,14 @@ export class MatchModel {
                 type: STRING(36),
                 primaryKey: true
             },
-            "teamHome": {
+            "teamHomeId": {
                 type: STRING(36),
                 references: {
                     model: this.teamModel.model,
                     key: "id"
                 }
             },
-            "teamGuest": {
+            "teamGuestId": {
                 type: STRING(36),
                 references: {
                     model: this.teamModel.model,
