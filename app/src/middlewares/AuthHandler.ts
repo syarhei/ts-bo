@@ -16,8 +16,10 @@ export class AuthHandler {
     public checkUserPermissions(req: Request, res: Response, next: NextFunction): void {
         const userId: string = req.params.userId;
         const user: UserForPassport = req.user as UserForPassport;
-        if (user.role === ADMIN_ROLE_NAME || userId !== user.id) {
+        if (user.role !== ADMIN_ROLE_NAME && userId !== user.id) {
             next(new AuthError(`You don't have any permissions`, 2));
+        } else {
+            next();
         }
     }
 
